@@ -9,49 +9,49 @@
 #include <cairomm/surface.h>
 
 // -----------------------------------------------------------------------------
-/*! Класс Стрелочный прибор 
+/*! РљР»Р°СЃСЃ РЎС‚СЂРµР»РѕС‡РЅС‹Р№ РїСЂРёР±РѕСЂ 
 */
 class ArrowDevice : public Gtk::Fixed
 {
     public:
 
-        ArrowDevice(std::string facial, bool glo_);		/*!< параметры: строка на лицевой панели 
-																	и флаг графической оптимизации */
+        ArrowDevice(std::string facial, bool glo_);		/*!< РїР°СЂР°РјРµС‚СЂС‹: СЃС‚СЂРѕРєР° РЅР° Р»РёС†РµРІРѕР№ РїР°РЅРµР»Рё 
+																	Рё С„Р»Р°Рі РіСЂР°С„РёС‡РµСЃРєРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё */
         virtual ~ArrowDevice();
 
-		void setValue(int val);							/*!< передача прибору нового значения */
-		void setScale(int minp, int maxp, float step);	/*!< установка шкалы (default 0,100,20) */
-		void setScaleMarksNumber(int num);				/*!< количество маленьких рисок между большими */
+		void setValue(int val);							/*!< РїРµСЂРµРґР°С‡Р° РїСЂРёР±РѕСЂСѓ РЅРѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ */
+		void setScale(int minp, int maxp, float step);	/*!< СѓСЃС‚Р°РЅРѕРІРєР° С€РєР°Р»С‹ (default 0,100,20) */
+		void setScaleMarksNumber(int num);				/*!< РєРѕР»РёС‡РµСЃС‚РІРѕ РјР°Р»РµРЅСЊРєРёС… СЂРёСЃРѕРє РјРµР¶РґСѓ Р±РѕР»СЊС€РёРјРё */
 
-		void setFacialString(std::string newFacial);	/*!< строка на лицевой панели прибора (default Facial) */
-		void setInerc(float inerciya);					/*!< инерционность прибора (default 3) */
+		void setFacialString(std::string newFacial);	/*!< СЃС‚СЂРѕРєР° РЅР° Р»РёС†РµРІРѕР№ РїР°РЅРµР»Рё РїСЂРёР±РѕСЂР° (default Facial) */
+		void setInerc(float inerciya);					/*!< РёРЅРµСЂС†РёРѕРЅРЅРѕСЃС‚СЊ РїСЂРёР±РѕСЂР° (default 3) */
 
-		void setRedrawTime(int rTime);	/*!< период перерисовки в мс. (default 60), влияет на инерционность */
-		/*! добавление цветного сектора */
+		void setRedrawTime(int rTime);	/*!< РїРµСЂРёРѕРґ РїРµСЂРµСЂРёСЃРѕРІРєРё РІ РјСЃ. (default 60), РІР»РёСЏРµС‚ РЅР° РёРЅРµСЂС†РёРѕРЅРЅРѕСЃС‚СЊ */
+		/*! РґРѕР±Р°РІР»РµРЅРёРµ С†РІРµС‚РЅРѕРіРѕ СЃРµРєС‚РѕСЂР° */
 		void addSect(int startBorder,int endBorder,
 				double red,	double green, double blue,double alfa, bool solid);
 		void delLastSect();
 		
-		void setMarksFontSize(int num);				/*!< размер шрифта шкалы */
-		void setDigitFontSize(int num);				/*!< размер шрифта числового значения */
-		void setLabelFontSize(int num);				/*!< размер шрифта надписи */
-		void setScaleMarkWidth(int pix);			/*!< толщина рисок */
-		void setColorLineWidth(int pix);			/*!< толщина цветной линии */
+		void setMarksFontSize(int num);				/*!< СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р° С€РєР°Р»С‹ */
+		void setDigitFontSize(int num);				/*!< СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р° С‡РёСЃР»РѕРІРѕРіРѕ Р·РЅР°С‡РµРЅРёСЏ */
+		void setLabelFontSize(int num);				/*!< СЂР°Р·РјРµСЂ С€СЂРёС„С‚Р° РЅР°РґРїРёСЃРё */
+		void setScaleMarkWidth(int pix);			/*!< С‚РѕР»С‰РёРЅР° СЂРёСЃРѕРє */
+		void setColorLineWidth(int pix);			/*!< С‚РѕР»С‰РёРЅР° С†РІРµС‚РЅРѕР№ Р»РёРЅРёРё */
 
     protected:
 
-		void GoDynamics(void);			/*!< фунция перерисовки */	
-        bool Redraw(void);				/*!< фунция перерисовки */
+		void GoDynamics(void);			/*!< С„СѓРЅС†РёСЏ РїРµСЂРµСЂРёСЃРѕРІРєРё */	
+        bool Redraw(void);				/*!< С„СѓРЅС†РёСЏ РїРµСЂРµСЂРёСЃРѕРІРєРё */
         bool on_expose_event(GdkEventExpose* event); 
 		
 
-		/*! инициализация шкалы */ 
+		/*! РёРЅРёС†РёР°Р»РёР·Р°С†РёСЏ С€РєР°Р»С‹ */ 
 		virtual void ScaleInit(Cairo::RefPtr<Cairo::Context>& cr);
-		/*! раскраска секторов */
+		/*! СЂР°СЃРєСЂР°СЃРєР° СЃРµРєС‚РѕСЂРѕРІ */
 		virtual void ColorizeSectors(Cairo::RefPtr<Cairo::Context>& cr);
-		/*! рисование стрелочки */
+		/*! СЂРёСЃРѕРІР°РЅРёРµ СЃС‚СЂРµР»РѕС‡РєРё */
 		virtual void ArrowDrawing(Cairo::RefPtr<Cairo::Context>& cr);
-		/*! рисование верхнего слоя (стеклышка) */
+		/*! СЂРёСЃРѕРІР°РЅРёРµ РІРµСЂС…РЅРµРіРѕ СЃР»РѕСЏ (СЃС‚РµРєР»С‹С€РєР°) */
 		virtual void GlassDrawing(Cairo::RefPtr<Cairo::Context>& cr);
 		
 		virtual void BlickDrawing(Cairo::RefPtr<Cairo::Context>& cr);
@@ -59,23 +59,23 @@ class ArrowDevice : public Gtk::Fixed
 //		Gtk::Label label;
 //		UniLed led;
 
-		int value;						/*!< реальное значение величины */
-	    float prevValue,dValue,aValue;	/*!< значения для динамики, aValue - показываемое стрелкой значение */
-		float x_pos,y_pos;				/*!< позиция виджета */
-		std::string facial, devName, myFont;	/*!< строка на лицевой панели, название девайса, шрифт */
+		int value;						/*!< СЂРµР°Р»СЊРЅРѕРµ Р·РЅР°С‡РµРЅРёРµ РІРµР»РёС‡РёРЅС‹ */
+	    float prevValue,dValue,aValue;	/*!< Р·РЅР°С‡РµРЅРёСЏ РґР»СЏ РґРёРЅР°РјРёРєРё, aValue - РїРѕРєР°Р·С‹РІР°РµРјРѕРµ СЃС‚СЂРµР»РєРѕР№ Р·РЅР°С‡РµРЅРёРµ */
+		float x_pos,y_pos;				/*!< РїРѕР·РёС†РёСЏ РІРёРґР¶РµС‚Р° */
+		std::string facial, devName, myFont;	/*!< СЃС‚СЂРѕРєР° РЅР° Р»РёС†РµРІРѕР№ РїР°РЅРµР»Рё, РЅР°Р·РІР°РЅРёРµ РґРµРІР°Р№СЃР°, С€СЂРёС„С‚ */
 
-		int minp,maxp;					/*!< max & min значения на шкале */
-		float step;						/*!< шаг шкалы */
+		int minp,maxp;					/*!< max & min Р·РЅР°С‡РµРЅРёСЏ РЅР° С€РєР°Р»Рµ */
+		float step;						/*!< С€Р°Рі С€РєР°Р»С‹ */
 		
-		float sIndex;					/*!< индех пропорциональности */
-		float squareside,width,height;	/*!< сторона квадрата - минимальное из ширины и высоты виджета */
+		float sIndex;					/*!< РёРЅРґРµС… РїСЂРѕРїРѕСЂС†РёРѕРЅР°Р»СЊРЅРѕСЃС‚Рё */
+		float squareside,width,height;	/*!< СЃС‚РѕСЂРѕРЅР° РєРІР°РґСЂР°С‚Р° - РјРёРЅРёРјР°Р»СЊРЅРѕРµ РёР· С€РёСЂРёРЅС‹ Рё РІС‹СЃРѕС‚С‹ РІРёРґР¶РµС‚Р° */
 
-		int redrawTime;					/*!< время перерисовки, влияет на инерционность */
-		float inerc;					/*!< инерционность стрелки ( <1-безынерционная, max 15, default 3) */
-		bool gg,overshoot,redr,glo;		/*!< флаги инерционности, перегрузки, перерисовки и графической оптимизации
-														соответственно */
+		int redrawTime;					/*!< РІСЂРµРјСЏ РїРµСЂРµСЂРёСЃРѕРІРєРё, РІР»РёСЏРµС‚ РЅР° РёРЅРµСЂС†РёРѕРЅРЅРѕСЃС‚СЊ */
+		float inerc;					/*!< РёРЅРµСЂС†РёРѕРЅРЅРѕСЃС‚СЊ СЃС‚СЂРµР»РєРё ( <1-Р±РµР·С‹РЅРµСЂС†РёРѕРЅРЅР°СЏ, max 15, default 3) */
+		bool gg,overshoot,redr,glo;		/*!< С„Р»Р°РіРё РёРЅРµСЂС†РёРѕРЅРЅРѕСЃС‚Рё, РїРµСЂРµРіСЂСѓР·РєРё, РїРµСЂРµСЂРёСЃРѕРІРєРё Рё РіСЂР°С„РёС‡РµСЃРєРѕР№ РѕРїС‚РёРјРёР·Р°С†РёРё
+														СЃРѕРѕС‚РІРµС‚СЃС‚РІРµРЅРЅРѕ */
 		
-		sigc::connection tmrConn;		/*!< соединение с сигналом таймера */
+		sigc::connection tmrConn;		/*!< СЃРѕРµРґРёРЅРµРЅРёРµ СЃ СЃРёРіРЅР°Р»РѕРј С‚Р°Р№РјРµСЂР° */
 
 
 		Cairo::RefPtr< Cairo::Pattern > scalePatt, glassPatt;
@@ -83,19 +83,19 @@ class ArrowDevice : public Gtk::Fixed
 		Cairo::RefPtr< Cairo::RadialGradient> radgrad;
 
 		
-		int secCnt;						/*!< счетчик цветных секторов */
-		struct sects					/*!< структура инициализации цветного сектора */
+		int secCnt;						/*!< СЃС‡РµС‚С‡РёРє С†РІРµС‚РЅС‹С… СЃРµРєС‚РѕСЂРѕРІ */
+		struct sects					/*!< СЃС‚СЂСѓРєС‚СѓСЂР° РёРЅРёС†РёР°Р»РёР·Р°С†РёРё С†РІРµС‚РЅРѕРіРѕ СЃРµРєС‚РѕСЂР° */
 		{	
-			int startBorder;			/*!< начало сектора */
-			int endBorder;				/*!< конец сектора */
-			double red;					/*!< уровень красного */
-			double green;				/*!< зеленого */
-			double blue;				/*!< синего */
-			double alfa;				/*!< альфа-канал (непрозрачность) */
-			bool solid;					/*!< флаг заливки всего сектора */
+			int startBorder;			/*!< РЅР°С‡Р°Р»Рѕ СЃРµРєС‚РѕСЂР° */
+			int endBorder;				/*!< РєРѕРЅРµС† СЃРµРєС‚РѕСЂР° */
+			double red;					/*!< СѓСЂРѕРІРµРЅСЊ РєСЂР°СЃРЅРѕРіРѕ */
+			double green;				/*!< Р·РµР»РµРЅРѕРіРѕ */
+			double blue;				/*!< СЃРёРЅРµРіРѕ */
+			double alfa;				/*!< Р°Р»СЊС„Р°-РєР°РЅР°Р» (РЅРµРїСЂРѕР·СЂР°С‡РЅРѕСЃС‚СЊ) */
+			bool solid;					/*!< С„Р»Р°Рі Р·Р°Р»РёРІРєРё РІСЃРµРіРѕ СЃРµРєС‚РѕСЂР° */
 		};
 
-		sects sectList[9];				/*!< хранилище инициализаторов цветных секторов */
+		sects sectList[9];				/*!< С…СЂР°РЅРёР»РёС‰Рµ РёРЅРёС†РёР°Р»РёР·Р°С‚РѕСЂРѕРІ С†РІРµС‚РЅС‹С… СЃРµРєС‚РѕСЂРѕРІ */
 		
 		Pango::FontDescription pFont;
 
