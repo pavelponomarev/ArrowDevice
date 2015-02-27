@@ -35,11 +35,11 @@ CArrowDevice::~CArrowDevice()
 void CArrowDevice::ArrowDrawing(Cairo::RefPtr<Cairo::Context>& cr)
 {
 
-		float lengtArrow = LENGHT_ARROW*squareside;//длина стрелки
+		float lengtArrow = LENGHT_ARROW*squareside;//п╢п╩п╦п╫п╟ я│я┌я─п╣п╩п╨п╦
 	    float phia = SCALE_RANGE *( ( aValue-minp)/(maxp-minp) );
 		if(phia < 0) 
 			phia = 0;
-        float center = ARROW_ROOT*squareside; //начало стрелки
+        float center = ARROW_ROOT*squareside; //п╫п╟я┤п╟п╩п╬ я│я┌я─п╣п╩п╨п╦
 		float x1_new = center + x_pos;
 		float y1_new = center + y_pos;
 		float x2_new = center - lengtArrow*cos( phia - SCALE_SHIFT ) + x_pos;
@@ -47,7 +47,7 @@ void CArrowDevice::ArrowDrawing(Cairo::RefPtr<Cairo::Context>& cr)
 		
 		cr->set_line_cap(Cairo::LINE_CAP_ROUND);
 			
-        // рисуем cтрелку
+        // я─п╦я│я┐п╣п╪ cя┌я─п╣п╩п╨я┐
 			
 		float x2_n = center - FAT_ARROW*lengtArrow*cos( phia - SCALE_SHIFT ) + x_pos;
 		float y2_n = center - FAT_ARROW*lengtArrow*sin( phia - SCALE_SHIFT ) + y_pos;
@@ -56,13 +56,13 @@ void CArrowDevice::ArrowDrawing(Cairo::RefPtr<Cairo::Context>& cr)
 		cr->set_line_width(5);
 		cr->move_to( x1_new, y1_new );
 		cr->line_to( x2_n, y2_n );
-		cr->stroke();		//толстая
+		cr->stroke();		//я┌п╬п╩я│я┌п╟я▐
 	
 		cr->set_source_rgba(1, 0, 0, 1);
 		cr->set_line_width(1);
 		cr->move_to( x1_new, y1_new );
 		cr->line_to( x2_new, y2_new );
-		cr->stroke(); //тонкая часть
+		cr->stroke(); //я┌п╬п╫п╨п╟я▐ я┤п╟я│я┌я▄
 	
 	
 		if(overshoot)
@@ -91,9 +91,9 @@ void CArrowDevice::ArrowDrawing(Cairo::RefPtr<Cairo::Context>& cr)
 
 //------------------------------------------------------------------------------
 void CArrowDevice::ScaleInit(Cairo::RefPtr<Cairo::Context>& cr)
-{//рисуем шкалу
+{//я─п╦я│я┐п╣п╪ я┬п╨п╟п╩я┐
 
-		//всю поверхность красим в черное
+		//п╡я│я▌ п©п╬п╡п╣я─я┘п╫п╬я│я┌я▄ п╨я─п╟я│п╦п╪ п╡ я┤п╣я─п╫п╬п╣
 		cr->set_source_rgba(0, 0, 0, 1);//black - the colour of the pen
 	    cr->paint();
 		cr->stroke();
@@ -111,19 +111,19 @@ void CArrowDevice::ScaleInit(Cairo::RefPtr<Cairo::Context>& cr)
 		cr->line_to(squareside+x_pos,squareside/30+y_pos);
 		cr->stroke();
 */
-		//пишем какое-нить слово
+		//п©п╦я┬п╣п╪ п╨п╟п╨п╬п╣-п╫п╦я┌я▄ я│п╩п╬п╡п╬
 		cr->set_source_rgba(1, 1, 1, 1);   // white
 		cr->set_font_size( LABEL_FONTSIZE*sIndex );	
 		cr->move_to( X_LABEL*squareside + x_pos, Y_LABEL*squareside + y_pos);
 		cr->show_text(facial);
 		cr->stroke();		
 
-		//красим сектора
+		//п╨я─п╟я│п╦п╪ я│п╣п╨я┌п╬я─п╟
 		ColorizeSectors(cr);
 
-		//начинаем рисовать риски
+		//п╫п╟я┤п╦п╫п╟п╣п╪ я─п╦я│п╬п╡п╟я┌я▄ я─п╦я│п╨п╦
 		int i, tstep[] = {10,5,6,4,3,7,2,8,9}, bigMax = 5;
-		double phi, lc = LENGHT_SCALEMARK;//lc - длина риски шкалы
+		double phi, lc = LENGHT_SCALEMARK;//lc - п╢п╩п╦п╫п╟ я─п╦я│п╨п╦ я┬п╨п╟п╩я▀
 	
 		if ( maxp*minp < 0 ) 
 			bigMax = 6;
@@ -131,12 +131,12 @@ void CArrowDevice::ScaleInit(Cairo::RefPtr<Cairo::Context>& cr)
 		for ( i = 0; (i < 7) && (step != ( maxp - minp )/bigMax); i++)
 			bigMax = tstep[i];
 
-		int small = 1, big = bigMax;// big - счетчик больших черточек small - счетчик маленьких черточек
+		int small = 1, big = bigMax;// big - я│я┤п╣я┌я┤п╦п╨ п╠п╬п╩я▄я┬п╦я┘ я┤п╣я─я┌п╬я┤п╣п╨ small - я│я┤п╣я┌я┤п╦п╨ п╪п╟п╩п╣п╫я▄п╨п╦я┘ я┤п╣я─я┌п╬я┤п╣п╨
 				
-		float otstoys = RADIUS*squareside;//радиус шкалы
+		float otstoys = RADIUS*squareside;//я─п╟п╢п╦я┐я│ я┬п╨п╟п╩я▀
 		float center = ARROW_ROOT*squareside;
-				// далее идет расчет координат концов рисок (в зависимости от угла j (phi))
-				// через каждые пять маленьких рисок (lc=0.95) идет большая (lc=0.9)
+				// п╢п╟п╩п╣п╣ п╦п╢п╣я┌ я─п╟я│я┤п╣я┌ п╨п╬п╬я─п╢п╦п╫п╟я┌ п╨п╬п╫я├п╬п╡ я─п╦я│п╬п╨ (п╡ п╥п╟п╡п╦я│п╦п╪п╬я│я┌п╦ п╬я┌ я┐пЁп╩п╟ j (phi))
+				// я┤п╣я─п╣п╥ п╨п╟п╤п╢я▀п╣ п©я▐я┌я▄ п╪п╟п╩п╣п╫я▄п╨п╦я┘ я─п╦я│п╬п╨ (lc=0.95) п╦п╢п╣я┌ п╠п╬п╩я▄я┬п╟я▐ (lc=0.9)
 
 		cr->set_source_rgba(1, 1, 1, 1);		
 		
@@ -186,7 +186,7 @@ void CArrowDevice::ColorizeSectors(Cairo::RefPtr<Cairo::Context>& cr)
 {
 	float theta1,theta2;
 
-	float otstoys = RADIUS*squareside;//радиус шкалы
+	float otstoys = RADIUS*squareside;//я─п╟п╢п╦я┐я│ я┬п╨п╟п╩я▀
 	float center = ARROW_ROOT*squareside;
 
 	for( int i=0; i < secCnt; i++)
@@ -220,8 +220,8 @@ void CArrowDevice::ColorizeSectors(Cairo::RefPtr<Cairo::Context>& cr)
 //------------------------------------------------------------------------------
 void CArrowDevice::GlassDrawing(Cairo::RefPtr<Cairo::Context>& cr)
 {
-        float center = ARROW_ROOT*squareside; //начало стрелки
-				//штука, которая закрывает основание стрелки
+        float center = ARROW_ROOT*squareside; //п╫п╟я┤п╟п╩п╬ я│я┌я─п╣п╩п╨п╦
+				//я┬я┌я┐п╨п╟, п╨п╬я┌п╬я─п╟я▐ п╥п╟п╨я─я▀п╡п╟п╣я┌ п╬я│п╫п╬п╡п╟п╫п╦п╣ я│я┌я─п╣п╩п╨п╦
 			cr->set_source_rgba(0, 0, 0, 0.2);
 			cr->arc( center + x_pos + 1, center + y_pos + 1,
 						(int)squareside*0.13, 0, 2*M_PI );
