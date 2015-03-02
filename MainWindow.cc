@@ -8,40 +8,33 @@
 
 //------------------------------------------------------------------------------
 
-//using namespace sigc;
-
 using namespace std;
-
 
 //------------------------------------------------------------------------------
 MainWindow::MainWindow():
 	dev1("dev1", 1),
-	dev2("dev2", 1),//dev3("dev3"),dev4("dev4"),
+	dev2("dev2", 1),
 	dev5("value %", 1),
 	dev6("energy", 1),
 	devC("circle dev", 1),
 	vbox(false,0),
 	flag(false)
 {
-	dev2.setFacialString("H*m");
-	dev1.setFacialString("mass %");
-//	dev4.setFacialString(Glib::locale_to_utf8("נעיגןע"));
+	// initialize widgets
 
+	dev1.setFacialString("mass %");
 	dev1.setScale(0,600,150);
 	dev1.setScaleMarksNumber(4);
 	dev1.addSect(0,450,0,1.,0.,0.4,0);
 	dev1.addSect(450,600,1.,1.,0,0.4,0);
 	dev1.setScaleMarkWidth(1);
-	
+
+	dev2.setFacialString("H*m");	
 	dev2.setScale(20,40,10);
 	dev2.setScaleMarksNumber(10);
 	dev2.addSect(25,30,0,1,0,0.3,1);
 	dev2.addSect(30,35,1,1,0,0.6,0);
 	dev2.addSect(35,40,1,0,0,1,0);
-		
-//	dev3.setSectors(20,45,60,80);	
-
-//	dev4.setScale(0,100,20);
 
 	dev5.setScale(0,100,20);
 	dev5.addSect(0,40,1,1,0,0.6,1);
@@ -71,21 +64,17 @@ MainWindow::MainWindow():
 
 	dev1.setInerc(6);
 	dev2.setInerc(18);
-//	dev3.setInerc(0);
-//	dev4.setInerc(20);
 
 	dev2.set_size_request(300,300);
 	dev6.set_size_request(350,350);
-//	dev3.set_size_request(250,150);
-	
+
+
+	// actual packing within the window
 	box1.add(dev1);
-//	box1.add(vsep1);
+
 	box1.add(dev2);
 	box1.add(devC);
-//	box1.add(vsep2);	
-//	box1.add(dev3);
-	
-//	box2.add(dev4);
+
 	box2.add(dev5);
 	box2.add(dev6);
 	
@@ -94,6 +83,7 @@ MainWindow::MainWindow():
 
 	add(vbox);
 
+	//setting initial values
 	dev1.setValue(700);
 	dev2.setValue(22);
 //	dev3.setValue(25);
